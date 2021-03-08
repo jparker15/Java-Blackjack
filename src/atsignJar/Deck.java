@@ -20,9 +20,6 @@ public class Deck {
     }
 
     public Card draw(){
-        if(cards.isEmpty()){
-            System.out.println("Deck is Empty");
-        }
         return cards.remove(cards.size() - 1);
     }
 
@@ -31,8 +28,13 @@ public class Deck {
     }
 
     public void playAll(){
-        for (int i = 0; i <= 52;i++ ){
-            System.out.println(draw().displayFace());
+        try{
+            for (int i = 0; i <= 52;i++ ){
+                System.out.println(draw().displayFace());
+            }
+        }catch(Exception e){
+            System.out.println("Deck is Empty");
         }
+
     }
 }
