@@ -16,7 +16,6 @@ public class Card {
         return value;
     }
 
-
     public String displayFace(){
         String output = "";
 
