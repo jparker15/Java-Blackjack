@@ -11,12 +11,16 @@ public class Hand {
         cardsHeld = new ArrayList<>();
     }
 
-    public void addCard(Card card){
+    public void startHand(Card card){
+        addCard(card);
+        addCard(card);
+        displayHand();
+    }
+
+    public int addCard(Card card){
         cardsHeld.add(card);
-//        System.out.println(card.displayFace());
         score = 0;
         for(Card addedCard: cardsHeld){
-            System.out.println(addedCard.displayFace());
             if(addedCard.getValue() > 10){
                 score += 10;
             }
@@ -24,18 +28,27 @@ public class Hand {
                 score += addedCard.getValue();
             }
         }
-        if(score > 21){
-            System.out.println("BUST!\n Score:" + score);
-        }else{
-            System.out.println("Score:" + score);
-        }
-
+        return score;
     }
 
     public void displayHand(){
         for(Card card: cardsHeld){
             System.out.println(card.displayFace());
         }
+//        checkScore();
+    }
+
+    public int checkScore(){
+        if(score > 21){
+            System.out.println("BUST!\n Score:" + score);
+
+        }else if (score == 21){
+            System.out.println("BLACKJACK!" + score);
+
+        }else{
+            System.out.println("Score:" + score);
+        }
+        return score;
     }
 
 
