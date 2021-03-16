@@ -13,7 +13,6 @@ public class Hand {
 
     public void startHand(Card card){
         addCard(card);
-        addCard(card);
         displayHand();
     }
 
