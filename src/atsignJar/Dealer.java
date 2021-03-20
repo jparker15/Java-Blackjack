@@ -1,2 +1,8 @@
-package atsignJar;public class Dealer {
+package atsignJar;
+
+public class Dealer extends Hand{
+
 }
+
+
+
