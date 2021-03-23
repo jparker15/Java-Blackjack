@@ -23,27 +23,31 @@ public class Blackjack {
 
         player.addCard(deck.draw());
         player.addCard(deck.draw());
+        System.out.println(player.name + "'s Hand:");
         player.displayHand();
 
 
         while(true) {
             System.out.println("Hit (1) or Stand (2)");
             int a = scanner.nextInt();
-            player.checkScore();
+//            player.checkScore();
 
             if (a != 1) {break; }
 
-            if(!player.checkScore()){
+            player.addCard(deck.draw());
+            player.displayHand();
+
+            if(player.getScore() > 21 ){
                 break;
             }
-            else{
-                player.addCard(deck.draw());
-                player.displayHand();
-            }
+
+
+
         }
 
         dealer.addCard(deck.draw());
         dealer.addCard(deck.draw());
+        System.out.println(dealer.name + "'s Hand:");
         dealer.displayHand();
 
         while(true){
@@ -61,7 +65,7 @@ public class Blackjack {
     }
 
     public void checkWinner(){
-        if(player.getScore() > dealer.getScore()){
+        if(player.getScore() <= 21 && player.getScore() > dealer.getScore()){
             System.out.println("Winner");
         }else if(player.getScore() == dealer.getScore()){
             System.out.println("Draw");
