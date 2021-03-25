@@ -19,58 +19,83 @@ public class Blackjack {
     public void start(){
         System.out.println("Welcome to Black Jack!");
 
+        System.out.println("Enter Player Name:");
+        String playerName = scanner.next();
+        player.setName(playerName);
+//        System.out.println("Enter number of chips (1 - 100,000)");
+//        int chips = scanner.nextInt();
+//        player.setPoints(chips);
+
         deck.shuffle();
 
+        System.out.println("How much would you like to bet?");
+        int bet = scanner.nextInt();
+        player.setBet(bet);
         player.addCard(deck.draw());
         player.addCard(deck.draw());
-        System.out.println(player.name + "'s Hand:");
+        System.out.println(player.getName() + "'s Hand:");
         player.displayHand();
+        player.checkScore();
 
+        dealer.addCard((deck.draw()));
+        //Hides a dealer card
+        dealer.getHand().get(0).setHidden(true);
+        dealer.addCard(deck.draw());
+        System.out.println(dealer.name + "'s Hand:");
+        dealer.displayHand();
 
         while(true) {
             System.out.println("Hit (1) or Stand (2)");
             int a = scanner.nextInt();
-//            player.checkScore();
 
             if (a != 1) {break; }
 
             player.addCard(deck.draw());
             player.displayHand();
 
-            if(player.getScore() > 21 ){
+            if(!player.checkScore()){
                 break;
             }
-
-
-
         }
 
-        dealer.addCard(deck.draw());
-        dealer.addCard(deck.draw());
-        System.out.println(dealer.name + "'s Hand:");
-        dealer.displayHand();
-
         while(true){
+            dealer.getHand().get(0).setHidden(false);
             if(dealer.getScore() > 17){
+                dealer.displayHand();
+                dealer.checkScore();
                 break;
-            }else{
+            }else {
                 System.out.println("Dealer:");
                 dealer.addCard(deck.draw());
                 dealer.displayHand();
-                dealer.getScore();;
+                dealer.checkScore();
             }
-        }
 
+        }
+        System.out.println();
         checkWinner();
     }
 
     public void checkWinner(){
+        // Player didn't bust && dealer score is lower
         if(player.getScore() <= 21 && player.getScore() > dealer.getScore()){
-            System.out.println("Winner");
-        }else if(player.getScore() == dealer.getScore()){
+            System.out.println(player.getName() + " Won!");
+//            player.setPoints(player.getBet() * 2);
+            System.out.println(player.getBet() * 2);
+            return;
+        }// Dealer bust and player did not bust
+        if(dealer.getScore() > 21 && player.getScore() <= 21){
+            System.out.println(player.getName() + " Won!");
+            System.out.println(player.getBet() * 2);
+            return;
+        }// dealer and player score same
+        else if(player.getScore() == dealer.getScore()){
             System.out.println("Draw");
+            return;
         }else{
             System.out.println("Lose");
         }
     }
+
+
 }
