@@ -91,8 +91,10 @@ public class Blackjack {
         }// dealer and player score same
         else if(player.getScore() == dealer.getScore()){
             System.out.println("Draw");
+            System.out.println("Bet returned: " + player.getBet());
             return;
         }else{
+            System.out.println("-" + player.getBet());
             System.out.println("Lose");
         }
     }
