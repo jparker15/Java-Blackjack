@@ -37,6 +37,9 @@ public class Blackjack {
             if(!answer.toLowerCase().contains("y")){
                 break;
             }
+            player.clear();
+            dealer.clear();
+
         }
 
 
@@ -126,7 +129,7 @@ public class Blackjack {
             System.out.println("Lose");
             player.setPoints(player.getPoints() - player.getBet());
         }
-        System.out.println(player.getPoints());
+        System.out.println( "total chips:" + player.getPoints());
     }
 
 
